@@ -1,4 +1,4 @@
-document.addEventListener("onload", function() {
+document.addEventListener("DOMContentLoaded", function() {
 document.getElementById('contactCard').addEventListener('click', function() {
   const pinPopup = document.getElementById('pinPopup');
   pinPopup.style.display = 'block';
