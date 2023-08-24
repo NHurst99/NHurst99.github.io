@@ -1,3 +1,4 @@
+document.addEventListener("onload", function() {
 document.getElementById('contactCard').addEventListener('click', function() {
   const pinPopup = document.getElementById('pinPopup');
   pinPopup.style.display = 'block';
@@ -18,4 +19,5 @@ document.getElementById('submitPin').addEventListener('click', function() {
       alert('Incorrect PIN. Please try again.');
     }
   });
+});
 });
