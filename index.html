@@ -55,34 +55,12 @@
     </div>
 
     <div id="links">
-      <div id="links">
-        <!-- Other links ... -->
-      <!-- <a class="link" href="https://www.facebook.com/nick.hurst.167" target="_blank">
-        <i class="fab fa-facebook">&nbsp;</i>Facebook
-      </a>
-      <a class="link" href="https://www.instagram.com/cooltop101" target="_blank">
-        <i class="fab fa-instagram">&nbsp;</i>Instagram
-      </a>
-      <a class="link" href="https://twitter.com/cooltop101" target="_blank">
-        <i class="fab fa-twitter">&nbsp;</i>Twitter
-      </a>
-      <a class="link" href="https://discordapp.com/users/361568889899057152" target="_blank">
-        <i class="fab fa-discord">&nbsp;</i>Discord
-      </a>
-      <a class="link" href="https://open.spotify.com/user/1290301264?si=aa77642588254595" target="_blank">
-        <i class="fab fa-spotify">&nbsp;</i>Spotify
-      </a>
-      <a class="link" href="https://www.tiktok.com/@cooltop101" target="_blank">
-        <i class="fab fa-brands fa-tiktok">&nbsp;</i>TikTok
-      </a>
-      <a class="link" href="https://www.snapchat.com/add/cooltop101" target="_blank">
-        <i class="fab fa-snapchat">&nbsp;</i>Snapchat-->
-
+      <div id="dynamic-links">
         <script>
           fetch('links.json')
             .then(response => response.json())
             .then(links => {
-              const linksDiv = document.getElementById('links');
+              const linksDiv = document.getElementById('dynamic-links');
               links.forEach(link => {
                 const aTag = document.createElement('a');
                 aTag.className = 'link';
@@ -93,14 +71,14 @@
               });
             });
         </script>
+        </div>
+        <div id="hardcoded-links">
         <a class="link" href="#" id="contactCard">
           <i class="fab fa-contact"></i>&nbsp;Contact Card (vCard)
         </a>
       </div>
-      <!-- <a class="link" href="https://1drv.ms/u/s!ArJJT1udAn7_gYkVTSoGwXCxfmyHKg" target="_blank">
-        <i class="fab fa-contact"></i>&nbsp;Contact Card (vCard)
-      </a> -->
     </div>
+
 
     <div id="hashtag">
       #BeHappy❤
