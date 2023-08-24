@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Core theme CSS -->
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -39,12 +40,29 @@
       </div>
     </div>
 
+    <div class="overlay" id="pinPopup">
+      <div class="popup">
+        <input type="text" maxlength="1" class="pin-digit">
+        <input type="text" maxlength="1" class="pin-digit">
+        <input type="text" maxlength="1" class="pin-digit">
+        <input type="text" maxlength="1" class="pin-digit">
+        <button id="submitPin">Submit</button>
+        <a class="popup-close" onclick="document.getElementById('pinPopup').style.display = 'none'">&times;</a>
+      </div>
+    </div>
+
     <div id="userName">
-      @cooltop101
+      Nick Hurst
     </div>
 
     <div id="links">
-      <a class="link" href="https://www.facebook.com/nick.hurst.167" target="_blank">
+      <div id="links">
+        <!-- Other links ... -->
+        <a class="link" href="#" id="contactCard">
+          <i class="fab fa-contact"></i>&nbsp;Contact Card (vCard)
+        </a>
+      </div>
+      <!-- <a class="link" href="https://www.facebook.com/nick.hurst.167" target="_blank">
         <i class="fab fa-facebook">&nbsp;</i>Facebook
       </a>
       <a class="link" href="https://www.instagram.com/cooltop101" target="_blank">
@@ -63,7 +81,23 @@
         <i class="fab fa-tiktok">&nbsp;</i>TikTok
       </a>
       <a class="link" href="https://www.snapchat.com/add/cooltop101" target="_blank">
-        <i class="fab fa-snapchat">&nbsp;</i>Snapchat
+        <i class="fab fa-snapchat">&nbsp;</i>Snapchat-->
+
+        <script>
+          fetch('links.json')
+            .then(response => response.json())
+            .then(links => {
+              const linksDiv = document.getElementById('links');
+              links.forEach(link => {
+                const aTag = document.createElement('a');
+                aTag.className = 'link';
+                aTag.href = link.url;
+                aTag.target = '_blank';
+                aTag.innerHTML = `<i class="${link.icon}">&nbsp;</i>${link.name}`;
+                linksDiv.appendChild(aTag);
+              });
+            });
+        </script>
       <a class="link" href="https://1drv.ms/u/s!ArJJT1udAn7_gYkVTSoGwXCxfmyHKg" target="_blank">
         <i class="fab fa-contact"></i>&nbsp;Contact Card (vCard)
       </a>
