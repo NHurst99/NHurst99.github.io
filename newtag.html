@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick Hurst | Linktree</title>
+    <!-- Favicon -->
+    <link rel="icon" href="images/profile_square.jpg" type="image/x-icon" />
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
+    <!-- Core theme CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <!-- Parallax Pixel Background Animation -->
+    <section class="animated-background">
+      <div id="stars1"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
+    </section>
+    <!-- End of Parallax Pixel Background Animation -->
+
+    <a id="profilePicture" href="#popup">
+      <img src="images/profile_square.jpg" alt="Profile Picture">
+    </a>
+
+    <div class="overlay" id="popup">
+      <div class="popup">
+        <div class="popup-photo">
+          <a href="images/profile_square.jpg" target="_blank">
+            <img src="images/profile_square.jpg" alt="Profile Picture">
+          </a>
+        </div>
+        <div class="popup-quote">
+          But... the sensation that I've lost something lingers for a longtime after I wake up.
+        </div>
+        <a class="popup-close" onclick="history.back()">&times;</a>
+      </div>
+    </div>
+
+    <div class="overlay" id="pinPopup">
+      <div class="popup">
+        <input type="text" maxlength="1" class="pin-digit">
+        <input type="text" maxlength="1" class="pin-digit">
+        <input type="text" maxlength="1" class="pin-digit">
+        <input type="text" maxlength="1" class="pin-digit">
+        <button id="submitPin">Submit</button>
+        <a class="popup-close" onclick="document.getElementById('pinPopup').style.display = 'none'">&times;</a>
+      </div>
+    </div>
+
+    <div id="userName">
+      Nick Hurst
+    </div>
+
+    <div id="links">
+      <div id="dynamic-links">
+        <script>
+          fetch('links.json')
+            .then(response => response.json())
+            .then(links => {
+              const linksDiv = document.getElementById('dynamic-links');
+              links.forEach(link => {
+                const aTag = document.createElement('a');
+                aTag.className = 'link';
+                aTag.href = link.url;
+                aTag.target = '_blank';
+                aTag.innerHTML = `<i class="${link.icon}">&nbsp;</i>${link.name}`;
+                linksDiv.appendChild(aTag);
+              });
+            });
+        </script>
+        </div>
+        <div id="hardcoded-links">
+        <a class="link" href="#" id="contactCard">
+          <i class="fab fa-contact"></i>&nbsp;Contact Card (vCard)
+        </a>
+      </div>
+    </div>
+
+
+    <div id="hashtag">
+      #BeHappy❤
+    </div>
+  </body>
+</html>
