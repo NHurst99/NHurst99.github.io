@@ -1,88 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nick Hurst | Linktree</title>
-    <!-- Favicon -->
-    <link rel="icon" href="images/profile_square.jpg" type="image/x-icon" />
-    <!-- Font Awesome icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
-    <!-- Core theme CSS -->
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-
-  <body>
-    <!-- Parallax Pixel Background Animation -->
-    <section class="animated-background">
-      <div id="stars1"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+    <title>FestiTags: NFC Kandi Tutorial</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your EDM-themed stylesheet -->
+</head>
+<body>
+    <section class="festival-background">
+        <div id="lights1"></div>
+        <div id="lights2"></div>
+        <div id="stage"></div>
     </section>
-    <!-- End of Parallax Pixel Background Animation -->
 
-    <a id="profilePicture" href="#popup">
-      <img src="images/profile_square.jpg" alt="Profile Picture">
-    </a>
-
-    <div class="overlay" id="popup">
-      <div class="popup">
-        <div class="popup-photo">
-          <a href="images/profile_square.jpg" target="_blank">
-            <img src="images/profile_square.jpg" alt="Profile Picture">
-          </a>
+    <div id="tutorial-container">
+        <h1>🎉 FestiTags: Your Guide to NFC Kandi 🎶</h1>
+        <p>Ready to amp up your festival experience with FestiTags? Follow these steps to make your kandi stand out.</p>
+        
+        <div class="step">
+            <h2>Step 1: Pick Your Party Portal</h2>
+            <p>Think of what to put on your FestiTag - your LinkTree, Insta, a Spotify playlist, or even a phone number. This is where fellow festival-goers will be directed when they tap your bead.</p>
         </div>
-        <div class="popup-quote">
-          But... the sensation that I've lost something lingers for a longtime after I wake up.
+        
+        <div class="step">
+            <h2>Step 2: App It Up</h2>
+              <p>Download an NFC app to your phone that supports NTAG215 NFC tags. 'NFC Tools' (<a href="https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en_US&gl=US">Android</a>/<a href="https://apps.apple.com/us/app/nfc-tools/id1252962749">iOS</a>) or 'TagWriter' (<a href="https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter">Android</a>/<a href="">iOS</a>) are great choices.</p>
         </div>
-        <a class="popup-close" onclick="history.back()">&times;</a>
-      </div>
-    </div>
 
-    <div class="overlay" id="pinPopup">
-      <div class="popup">
-        <input type="text" maxlength="1" class="pin-digit">
-        <input type="text" maxlength="1" class="pin-digit">
-        <input type="text" maxlength="1" class="pin-digit">
-        <input type="text" maxlength="1" class="pin-digit">
-        <button id="submitPin">Submit</button>
-        <a class="popup-close" onclick="document.getElementById('pinPopup').style.display = 'none'">&times;</a>
-      </div>
-    </div>
-
-    <div id="userName">
-      Nick Hurst
-    </div>
-
-    <div id="links">
-      <div id="dynamic-links">
-        <script>
-          fetch('links.json')
-            .then(response => response.json())
-            .then(links => {
-              const linksDiv = document.getElementById('dynamic-links');
-              links.forEach(link => {
-                const aTag = document.createElement('a');
-                aTag.className = 'link';
-                aTag.href = link.url;
-                aTag.target = '_blank';
-                aTag.innerHTML = `<i class="${link.icon}">&nbsp;</i>${link.name}`;
-                linksDiv.appendChild(aTag);
-              });
-            });
-        </script>
+        <div class="step">
+            <h2>Step 3: Tag, You're It!</h2>
+            <p>Open the app, enter your URL, and bring your NFC tag close to your phone. Hit 'Write' and voilà - your FestiTag is ready!</p>
         </div>
-        <div id="hardcoded-links">
-        <a class="link" href="#" id="contactCard">
-          <i class="fab fa-contact"></i>&nbsp;Contact Card (vCard)
-        </a>
-      </div>
+
+        <div class="step">
+            <h2>Step 4: Share Your Vibe</h2>
+            <p>Test your FestiTag by tapping it with a phone. Once it works, rock it at festivals. Perfect for loud areas and near stages where shouting over the music isn't an option!</p>
+        </div>
     </div>
 
-
-    <div id="hashtag">
-      #BeHappy❤
+    <div id="footer">
+        <p>Make connections that last beyond the festival with FestiTags! 🎉</p>
     </div>
-  </body>
+</body>
 </html>
