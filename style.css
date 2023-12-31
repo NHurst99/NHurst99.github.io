@@ -103,6 +103,74 @@ body {
     -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
+.bwicon{
+    filter: brightness(0) invert(1);
+    width: 1em;
+    height: auto; /* This maintains the aspect ratio */
+    vertical-align: middle; /* Adjust as needed */
+
+}
+
+#pin-instruction {
+    color: #ffffff; /* Or any color that suits your design for contrast */
+    font-size: 1.5em; /* Larger font size for better visibility */
+    text-align: center; /* Center the text above the inputs */
+    margin-bottom: 20px; /* Spacing between the text and the inputs */
+    width: 100%; /* Ensure the text takes full width of the popup */
+    padding: 0 20px; /* Padding on the sides to prevent overflow */
+    box-sizing: border-box; /* Include padding in the element's total width */
+}
+
+.pin-digit {
+    border: 2px solid #000; /* Example border, adjust as needed */
+    border-radius: 8px; /* This will create a squircle shape */
+    text-align: center;
+    width: 50px; /* Set width and height to fit a single character */
+    height: 50px;
+    font-size: 2em; /* Large font size for easy readability */
+    margin: 10px 10px; /* Add space between input fields */
+
+}
+.pin-digit:focus {
+    outline: none;
+    border-color: #007bff; /* Highlight color when focused */
+}
+#submitPin {
+    margin-top: 20px; /* Space above the submit button */
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px; /* Consistent with input field styling */
+    border: none;
+    background-color: #007bff; /* Example button color */
+    color: white;
+    cursor: pointer;
+}
+
+.pin-inputs {
+    display: flex;
+    flex-direction: row; /* Line up children side by side */
+    justify-content: center; /* Center input fields in the container */
+    margin-bottom: 20px; /* Space between input fields and submit button */
+}
+
+#submitPin .fa-spinner {
+    display: none; /* Hide spinner by default */
+}
+
+#submitPin:disabled {
+    background-color: #ccc; /* Optional: change button color when disabled */
+    cursor: not-allowed;
+}
+
+#submitPin:disabled .button-text {
+    display: none; /* Hide button text when disabled */
+}
+
+#submitPin:disabled .fa-spinner {
+    display: inline-block; /* Show spinner when button is disabled */
+}
 
 /*-------------------------animations-----------------------*/
 @keyframes transitionAnimation {
@@ -156,19 +224,20 @@ body {
 
 .popup {
     position: relative;
-    top: -43%;
+    /* top: -43%; */
     /* right: -100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 400px;
+    justify-content: center;
     /* max-height: 500px; */
     width: auto;
     height: auto;
     margin: 56px;
     background-color: var(--bgColor);
     /* transform: rotate(32deg); */
-    transform: scale(0);
+    /* transform: scale(0); */
     transition: .5s ease-in-out;
 }
 

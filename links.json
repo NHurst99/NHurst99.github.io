@@ -5,6 +5,11 @@
       "name": "Facebook"
     },
     {
+      "icon": "https://radiate-marketing-site.s3-us-west-2.amazonaws.com/images/radiateLogoTransparent.svg",
+      "url": "https://radiate.app.link/FCKCZ8V2UFb",
+      "name": "Radiate"
+    } ,
+    {
       "icon": "fab fa-instagram",
       "url": "https://www.instagram.com/cooltop101",
       "name": "Instagram"
