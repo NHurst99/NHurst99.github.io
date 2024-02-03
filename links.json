@@ -38,5 +38,8 @@
       "icon": "fab fa-snapchat",
       "url": "https://www.snapchat.com/add/cooltop101",
       "name": "Snapchat"
-    }
+    },
+{"icon": "fab fa-phone",
+"url": "https://pin-auth.vercel.app/api/auth",
+"name"Contact Card"
   ]
