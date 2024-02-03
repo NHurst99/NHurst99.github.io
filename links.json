@@ -41,6 +41,6 @@
     },
 {"icon": "fab fa-phone",
 "url": "https://pin-auth.vercel.app/api/auth",
-"name"Contact Card"
+"name": "Contact Card"
 }
   ]
