@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sampler Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .sampler { border: 1px solid #ccc; padding: 10px; text-align: center; position: relative; user-select: none; }
+        .counter-overlay { position: absolute; top: 5px; right: 5px; background-color: rgba(0,0,0,0.7); color: white; padding: 5px; border-radius: 4px; }
+        button { margin: 5px; padding: 5px 10px; }
+        #result { margin-top: 20px; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+        .ingredients-grid img { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>Nick's Sampler Helper</h1>
+    <div class="grid" id="samplerGrid"></div>
+    <button onclick="calculateIngredients()">Submit</button>
+    <div id="result"></div>
+    <script>
+        let ingredients = [
+            { id: 1, name: "Mozzeralla Whips", amount: 2, unit: "oz" },
+            { id: 2, name: "GoldFish", amount: 1, unit: "oz" },
+            { id: 3, name: "Grapes", amount: 3, unit: "oz" },
+            { id: 4, name: "Apples", amount: 1, unit: "oz" },
+            { id: 5, name: "Bagel Crisps", amount: 2, unit: "oz", altAmount: 0.25, altUnit: "bags" },
+            { id: 6, name: "Beecher's Crackers", amount: 1, unit: "oz", altAmount: 0.25, altUnit: "bags" },
+            { id: 7, name: "Cheddar Cubes", amount: 3, unit: "oz" },
+            { id: 8, name: "Colby Jack Cubes", amount: 3, unit: "oz" },
+            { id: 9, name: "Cheddar Slices", amount: 2, unit: "slices" },
+            { id: 10, name: "Provolone Slices", amount: 2, unit: "slices" },
+            { id: 11, name: "Roast Beef", amount: 3, unit: "oz" , altAmount: 0.1875 , altUnit: "lbs"},
+            { id: 12, name: "Pepperoni", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 13, name: "Golden Brown Turkey", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 14, name: "Cracked Black Pepper Turkey", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 15, name: "Oven Roasted Chicken", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 16, name: "Buffalo Chicken", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 17, name: "Chicken Salad", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 18, name: "Tuna Salad", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 19, name: "Hummus Single Serve", amount: 1, unit: "cups" },
+            { id: 20, name: "Naan Dippers", amount: 3, unit: "oz", altAmount: 5 , altUnit: "dippers" },
+            { id: 21, name: "Brownies", amount: 2, unit: "Brownies" },
+            { id: 22, name: "Cauliflower", amount: 3, unit: "oz" },
+            { id: 23, name: "Carrots", amount: 3, unit: "oz" },
+            { id: 24, name: "Celery", amount: 3, unit: "oz" },
+            { id: 25, name: "Bell Peppers", amount: 3, unit: "oz" , altAmount: 0.25, altUnit: "peppers"},
+            { id: 26, name: "Honey Mesquite Turkey", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
+            { id: 27, name: "Cherry Tomatoes", amount: 4, unit: "oz"  , altAmount: 0.25 , altUnit: "cartons"},
+            { id: 28, name: "Grilled Chicken", amount: 3, unit: "oz" , altAmount: 0.75 , altUnit: "chickens" },
+            { id: 29, name: "Hard Boiled Egg", amount: 1, unit: "eggs"}
+        ];
+        let samplers = [
+            { id: 1, name: "Cheese & Cracker", ingredients: [1, 2, 3, 4] },
+            { id: 2, name: "Turkey & Cheese", ingredients: [13, 7, 8, 14] },
+            { id: 3, name: "Chicken & Cheese", ingredients: [15, 9, 10, 16] },
+            { id: 4, name: "Beef & Pepperoni", ingredients: [9, 11, 12, 10] },
+
+            { id: 5, name: "Turkey & Brownie", ingredients: [13, 8, 3, 21] },
+            { id: 6, name: "Roast Beef & Apples", ingredients: [11, 8, 4, 5] },
+            { id: 7, name: "Hummus & Veggies", ingredients: [19, 20, 22, 25] },
+            { id: 8, name: "Tuna Salad & Crackers", ingredients: [18, 5, 24, 7] },
+
+            { id: 9, name: "Chicken Salad & Crackers", ingredients: [17, 6, 7, 3] },
+            { id: 10, name: "Turkey & Veggie", ingredients: [24, 23, 13, 26] },
+            { id: 11, name: "Chicken & Tomato", ingredients: [28, 27, 7, 24] },
+            { id: 12, name: "Egg & Cheese", ingredients: [29, 7, 27] }
+        ];
+    </script>
+    <script>
+        let ingredientData = {};
+
+        samplers.forEach(sampler => sampler.count = 0);
+
+        function createSamplerGrid() {
+            const grid = document.getElementById('samplerGrid');
+            samplers.forEach(sampler => {
+                if (!sampler.name) return;
+                let div = document.createElement('div');
+                div.className = 'sampler';
+
+                let ingredientsHtml = '<div class=\"ingredients-grid\">';
+                sampler.ingredients.forEach(ingId => {
+                    let ing = ingredients.find(i => i.id === ingId);
+                    ingredientsHtml += `<img src=\"imgs/${ing.name}.png\" alt=\"${ing.name}\">`;
+                });
+                ingredientsHtml += '</div>';
+
+                div.innerHTML = `<strong>${sampler.name}</strong>${ingredientsHtml}`;
+                div.onclick = () => adjustCount(sampler, 1);
+
+                let overlay = document.createElement('div');
+                overlay.className = 'counter-overlay';
+                overlay.style.display = 'none';
+                div.appendChild(overlay);
+
+                grid.appendChild(div);
+                sampler.element = div;
+                sampler.overlay = overlay;
+            });
+        }
+
+        function adjustCount(sampler, delta) {
+            sampler.count = Math.max(0, sampler.count + delta);
+            sampler.overlay.innerHTML = `${sampler.count} <button onclick='event.stopPropagation(); adjustCount(getSampler(${sampler.id}), 1)'>+</button><button onclick='event.stopPropagation(); adjustCount(getSampler(${sampler.id}), -1)'>-</button>`;
+            sampler.overlay.style.display = sampler.count > 0 ? 'block' : 'none';
+        }
+
+        function getSampler(id) {
+            return samplers.find(s => s.id === id);
+        }
+
+        function calculateIngredients() {
+            ingredientData = {};
+            samplers.forEach(sampler => {
+                sampler.ingredients.forEach(ingId => {
+                    let ing = ingredients.find(i => i.id === ingId);
+                    if (!ingredientData[ing.name]) {
+                        ingredientData[ing.name] = { amount: 0, unit: ing.unit };
+                    }
+                    ingredientData[ing.name].amount += ing.amount * sampler.count;
+                });
+            });
+
+            displayIngredients();
+        }
+
+        function displayIngredients() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<h2>Ingredients Needed:</h2>';
+            const ul = document.createElement('ul');
+            for (let [name, data] of Object.entries(ingredientData)) {
+                if (data.amount > 0) {
+                    let li = document.createElement('li');
+                    li.textContent = `${name}: ${data.amount} ${data.unit}`;
+                    ul.appendChild(li);
+                }
+            }
+            resultDiv.appendChild(ul);
+        }
+
+        createSamplerGrid();
+    </script>
+
+    
+</body>
+</html>
