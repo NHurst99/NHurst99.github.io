@@ -23,12 +23,12 @@
         let ingredients = [
             { id: 1, name: "Mozzeralla Whips", amount: 2, unit: "oz" },
             { id: 2, name: "GoldFish", amount: 1, unit: "oz" },
-            { id: 3, name: "Grapes", amount: 3, unit: "oz" },
-            { id: 4, name: "Apples", amount: 1, unit: "oz" },
-            { id: 5, name: "Bagel Crisps", amount: 2, unit: "oz", altAmount: 0.25, altUnit: "bags" },
-            { id: 6, name: "Beecher's Crackers", amount: 1, unit: "oz", altAmount: 0.25, altUnit: "bags" },
-            { id: 7, name: "Cheddar Cubes", amount: 3, unit: "oz" },
-            { id: 8, name: "Colby Jack Cubes", amount: 3, unit: "oz" },
+            { id: 3, name: "Grapes", amount: 2.5, unit: "oz" },
+            { id: 4, name: "Apples", amount: 2.25, unit: "oz" },
+            { id: 5, name: "Bagel Crisps", amount: 1, unit: "oz", altAmount: 0.25, altUnit: "bags" },
+            { id: 6, name: "Beecher's Crackers", amount: 3, unit: "oz", altAmount: 10, altUnit: "crackers" },
+            { id: 7, name: "Cheddar Cubes", amount: 2, unit: "oz" },
+            { id: 8, name: "Colby Jack Cubes", amount: 2, unit: "oz" },
             { id: 9, name: "Cheddar Slices", amount: 2, unit: "slices" },
             { id: 10, name: "Provolone Slices", amount: 2, unit: "slices" },
             { id: 11, name: "Roast Beef", amount: 3, unit: "oz" , altAmount: 0.1875 , altUnit: "lbs"},
@@ -40,32 +40,34 @@
             { id: 17, name: "Chicken Salad", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
             { id: 18, name: "Tuna Salad", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
             { id: 19, name: "Hummus Single Serve", amount: 1, unit: "cups" },
-            { id: 20, name: "Naan Dippers", amount: 3, unit: "oz", altAmount: 5 , altUnit: "dippers" },
+            { id: 20, name: "Naan Dippers", amount: 1.5, unit: "oz", altAmount: 5 , altUnit: "dippers" },
             { id: 21, name: "Brownies", amount: 2, unit: "Brownies" },
-            { id: 22, name: "Cauliflower", amount: 3, unit: "oz" },
+            { id: 22, name: "Cauliflower", amount: 2, unit: "oz" },
             { id: 23, name: "Carrots", amount: 3, unit: "oz" },
-            { id: 24, name: "Celery", amount: 3, unit: "oz" },
-            { id: 25, name: "Bell Peppers", amount: 3, unit: "oz" , altAmount: 0.25, altUnit: "peppers"},
+            { id: 24, name: "Celery", amount: 2.5, unit: "oz" },
+            { id: 25, name: "Bell Peppers", amount: 1.5, unit: "oz" , altAmount: 0.25, altUnit: "peppers"},
             { id: 26, name: "Honey Mesquite Turkey", amount: 3, unit: "oz", altAmount: 0.1875 , altUnit: "lbs" },
-            { id: 27, name: "Cherry Tomatoes", amount: 4, unit: "oz"  , altAmount: 0.25 , altUnit: "cartons"},
+            { id: 27, name: "Cherry Tomatoes", amount: 2.5, unit: "oz"  , altAmount: 0.25 , altUnit: "cartons"},
             { id: 28, name: "Grilled Chicken", amount: 3, unit: "oz" , altAmount: 0.75 , altUnit: "chickens" },
             { id: 29, name: "Hard Boiled Egg", amount: 1, unit: "eggs"}
         ];
         let samplers = [
-            { id: 1, name: "Cheese & Cracker", ingredients: [1, 2, 3, 4] },
-            { id: 2, name: "Turkey & Cheese", ingredients: [13, 7, 8, 14] },
-            { id: 3, name: "Chicken & Cheese", ingredients: [15, 9, 10, 16] },
-            { id: 4, name: "Beef & Pepperoni", ingredients: [9, 11, 12, 10] },
-
-            { id: 5, name: "Turkey & Brownie", ingredients: [13, 8, 3, 21] },
-            { id: 6, name: "Roast Beef & Apples", ingredients: [11, 8, 4, 5] },
-            { id: 7, name: "Hummus & Veggies", ingredients: [19, 20, 22, 25] },
-            { id: 8, name: "Tuna Salad & Crackers", ingredients: [18, 5, 24, 7] },
-
-            { id: 9, name: "Chicken Salad & Crackers", ingredients: [17, 6, 7, 3] },
-            { id: 10, name: "Turkey & Veggie", ingredients: [24, 23, 13, 26] },
-            { id: 11, name: "Chicken & Tomato", ingredients: [28, 27, 7, 24] },
-            { id: 12, name: "Egg & Cheese", ingredients: [29, 7, 27] }
+            { id: 1, name: "Cheese & Cracker", ingredients: [2, 1, 4, 3] },
+            { id: 2, name: "Turkey & Cheese", ingredients: [10, 13, 14, 9] },
+            { id: 3, name: "Beef & Pepperoni", ingredients: [9, 11, 12, 10] },
+            { id: 4, name: "Chicken & Cheese", ingredients: [16, 13, 14, 15] },
+ 
+            { id: 5, name: "Hummus & Veggies", ingredients: [19, 25, 20, 22] },
+            { id: 6, name: "Chicken Salad & Crackers", ingredients: [17, 7, 6, 3] },
+            { id: 7, name: "Roast Beef & Apples", ingredients: [5, 4, 8, 11] },
+            { id: 8, name: "Turkey & Brownie", ingredients: [3, 8, 13, 21] },
+            
+            { id: 9, name: "Turkey & Veggie", ingredients: [24, 23, 7, 26] },
+            { id: 12, name: "Egg & Cheese", ingredients: [7, 5, 29, 27] },
+            { id: 11, name: "Chicken & Apple", ingredients: [28, 7, 27, 4] },
+            { id: 8, name: "Tuna Salad & Crackers", ingredients: [5, 7, 24, 18] }
+            
+            
         ];
     </script>
     <script>
