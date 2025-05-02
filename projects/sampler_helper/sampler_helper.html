@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body { font-family: Arial, sans-serif; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
         .sampler { border: 1px solid #ccc; padding: 10px; text-align: center; position: relative; user-select: none; }
-        .counter-overlay { position: absolute; top: 5px; right: 5px; background-color: rgba(0,0,0,0.7); color: white; padding: 5px; border-radius: 4px; }
-        button { margin: 5px; padding: 5px 10px; }
+        .counter-overlay { position: absolute; top: 28px; left: 0px; background-color: rgba(0,0,0,0.5); color: white; padding: 5px; border-radius: 4px; height: -webkit-fill-available; width: -webkit-fill-available;}
+        button { margin: 5px; padding: 5px 10px; width: 30%; height: 40%}
         #result { margin-top: 20px; }
         .ingredients-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
         .ingredients-grid img { width: 100%; height: auto; }
@@ -25,7 +25,7 @@
             { id: 2, name: "GoldFish", amount: 1, unit: "oz" },
             { id: 3, name: "Grapes", amount: 3, unit: "oz" },
             { id: 4, name: "Apples", amount: 1, unit: "oz" },
-            { id: 5, name: "Bagel Crisps", amount: 2, unit: "oz", altAmount: 0.25, altUnit: "bags" },
+            { id: 5, name: "Bagel Crisps", amount: 2, unit: "oz", altAmount: 10, altUnit: "chips" },
             { id: 6, name: "Beecher's Crackers", amount: 1, unit: "oz", altAmount: 0.25, altUnit: "bags" },
             { id: 7, name: "Cheddar Cubes", amount: 3, unit: "oz" },
             { id: 8, name: "Colby Jack Cubes", amount: 3, unit: "oz" },
@@ -65,7 +65,7 @@
             { id: 9, name: "Chicken Salad & Crackers", ingredients: [17, 6, 7, 3] },
             { id: 10, name: "Turkey & Veggie", ingredients: [24, 23, 13, 26] },
             { id: 11, name: "Chicken & Tomato", ingredients: [28, 27, 7, 24] },
-            { id: 12, name: "Egg & Cheese", ingredients: [29, 7, 27] }
+            { id: 12, name: "Egg & Cheese", ingredients: [29, 7, 27, 5] }
         ];
     </script>
     <script>
@@ -81,6 +81,8 @@
                 div.className = 'sampler';
 
                 let ingredientsHtml = '<div class=\"ingredients-grid\">';
+
+                
                 sampler.ingredients.forEach(ingId => {
                     let ing = ingredients.find(i => i.id === ingId);
                     ingredientsHtml += `<img src=\"imgs/${ing.name}.png\" alt=\"${ing.name}\">`;
@@ -88,12 +90,14 @@
                 ingredientsHtml += '</div>';
 
                 div.innerHTML = `<strong>${sampler.name}</strong>${ingredientsHtml}`;
-                div.onclick = () => adjustCount(sampler, 1);
+                div.onclick = () => adjustCount(sampler, 4);
 
                 let overlay = document.createElement('div');
                 overlay.className = 'counter-overlay';
                 overlay.style.display = 'none';
                 div.appendChild(overlay);
+                // div.innerHTML += overlay.outerHTML;
+                // overlay = div.querySelector('.counter-overlay');
 
                 grid.appendChild(div);
                 sampler.element = div;
@@ -103,7 +107,7 @@
 
         function adjustCount(sampler, delta) {
             sampler.count = Math.max(0, sampler.count + delta);
-            sampler.overlay.innerHTML = `${sampler.count} <button onclick='event.stopPropagation(); adjustCount(getSampler(${sampler.id}), 1)'>+</button><button onclick='event.stopPropagation(); adjustCount(getSampler(${sampler.id}), -1)'>-</button>`;
+            sampler.overlay.innerHTML = `<button onclick='event.stopPropagation(); adjustCount(getSampler(${sampler.id}), -1)'>-</button> ${sampler.count} <button onclick='event.stopPropagation(); adjustCount(getSampler(${sampler.id}), 1)'>+</button>`;
             sampler.overlay.style.display = sampler.count > 0 ? 'block' : 'none';
         }
 
