@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- TODO: Remove multiple color tags from non-smooth -->
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -56,7 +57,8 @@
     <div id="warning"></div>
     <div id="preview" class="preview"></div>
 
-    <label for="output">Output</label>
+    <label for="output">Output - Copy and paste this into Overwatch chat or custom games
+    </label>
     <textarea id="output" class="output" rows="6" readonly></textarea>
 
     <div class="inline-controls">
@@ -192,7 +194,15 @@
   document.getElementById('numColors').addEventListener('input',updateAll);
   document.getElementById('generate').addEventListener('click',updateAll);
   document.getElementById('copy').addEventListener('click',copyOut);
-  document.getElementById('download-script').addEventListener('click',()=>downloadText('ow_gradient_final.py',document.getElementById('output').value));
+  document.getElementById('download-script').addEventListener('click',()=>{
+    const link = document.createElement('a');
+    link.href = encodeURIComponent("ow_gradient.py");
+    link.download = 'ow_gradient.py';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+);
   document.getElementById('download-palettes-btn').addEventListener('click',()=>downloadText('palettes.json',JSON.stringify(palettes,null,2)));
   // init
   populatePalettes(); setColorInputs(Object.values(palettes)[0]); updateAll();
